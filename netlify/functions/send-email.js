@@ -1,9 +1,8 @@
 const nodemailer = require('nodemailer');
-const Busboy = require('busboy').Busboy;
+const { Busboy } = require('busboy'); // ✅ Corrección del import
 
-exports.handler = async function(event,  context){
-      console.log(context)  
-  context.callbackWaitsForEmptyEventLoop = false;
+exports.handler = async function (event) {
+  // ✅ Eliminado context (no es necesario para Netlify Functions modernas)
 
   if (event.httpMethod !== 'POST') {
     console.log('Método no permitido:', event.httpMethod);
@@ -16,7 +15,7 @@ exports.handler = async function(event,  context){
   console.log('Iniciando procesamiento de formulario...');
 
   return new Promise((resolve, reject) => {
-    const busboy = new Busboy({ headers: event.headers });
+    const busboy = new Busboy({ headers: event.headers }); // ✅ Ya no lanza error
     const fields = {};
     const files = [];
 
@@ -27,10 +26,8 @@ exports.handler = async function(event,  context){
 
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
       console.log(`Archivo recibido: ${filename} (${mimetype})`);
-      let buffers = [];
-      file.on('data', (data) => {
-        buffers.push(data);
-      });
+      const buffers = [];
+      file.on('data', (data) => buffers.push(data));
       file.on('end', () => {
         files.push({
           filename,
@@ -43,10 +40,10 @@ exports.handler = async function(event,  context){
 
     busboy.on('finish', async () => {
       console.log('Campos:', fields);
-      console.log('Archivos adjuntos:', files.map(f => f.filename));
+      console.log('Archivos adjuntos:', files.map((f) => f.filename));
 
       try {
-        let transporter = nodemailer.createTransport({
+        const transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
             user: process.env.EMAIL_USER,
@@ -56,7 +53,7 @@ exports.handler = async function(event,  context){
 
         console.log('Transporter creado');
 
-        let mailOptions = {
+        const mailOptions = {
           from: `"Formulario Empleo" <${process.env.EMAIL_USER}>`,
           to: process.env.EMAIL_USER,
           subject: 'Nuevo Registro de Empleo',
