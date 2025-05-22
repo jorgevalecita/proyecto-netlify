@@ -1,31 +1,24 @@
 const nodemailer = require('nodemailer');
-const { Busboy } = require('busboy'); // ✅ Corrección del import
+const Busboy = require('busboy'); // ✅ Corrección aquí
 
 exports.handler = async function (event) {
-  // ✅ Eliminado context (no es necesario para Netlify Functions modernas)
-
   if (event.httpMethod !== 'POST') {
-    console.log('Método no permitido:', event.httpMethod);
     return {
       statusCode: 405,
       body: 'Método no permitido',
     };
   }
 
-  console.log('Iniciando procesamiento de formulario...');
-
   return new Promise((resolve, reject) => {
-    const busboy = new Busboy({ headers: event.headers }); // ✅ Ya no lanza error
+    const busboy = new Busboy({ headers: event.headers });
     const fields = {};
     const files = [];
 
     busboy.on('field', (fieldname, val) => {
-      console.log(`Campo recibido: ${fieldname} = ${val}`);
       fields[fieldname] = val;
     });
 
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
-      console.log(`Archivo recibido: ${filename} (${mimetype})`);
       const buffers = [];
       file.on('data', (data) => buffers.push(data));
       file.on('end', () => {
@@ -34,14 +27,10 @@ exports.handler = async function (event) {
           content: Buffer.concat(buffers),
           contentType: mimetype,
         });
-        console.log(`Archivo procesado: ${filename}`);
       });
     });
 
     busboy.on('finish', async () => {
-      console.log('Campos:', fields);
-      console.log('Archivos adjuntos:', files.map((f) => f.filename));
-
       try {
         const transporter = nodemailer.createTransport({
           service: 'gmail',
@@ -50,8 +39,6 @@ exports.handler = async function (event) {
             pass: process.env.EMAIL_PASS,
           },
         });
-
-        console.log('Transporter creado');
 
         const mailOptions = {
           from: `"Formulario Empleo" <${process.env.EMAIL_USER}>`,
@@ -67,19 +54,16 @@ exports.handler = async function (event) {
           attachments: files,
         };
 
-        console.log('Enviando correo...');
         await transporter.sendMail(mailOptions);
-        console.log('Correo enviado correctamente');
 
         resolve({
           statusCode: 200,
           body: JSON.stringify({ message: 'Formulario enviado exitosamente' }),
         });
       } catch (error) {
-        console.error('Error al enviar correo:', error);
         resolve({
           statusCode: 500,
-          body: JSON.stringify({ error: error.message || 'Error enviando correo' }),
+          body: JSON.stringify({ error: error.message }),
         });
       }
     });
