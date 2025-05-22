@@ -1,5 +1,5 @@
 {
-  "name": "formulario-netlify",
+  "name": "proyecto-netlify",
   "version": "1.0.0",
   "description": "Formulario de empleo con envío de correo en Netlify Functions",
   "main": "index.js",
@@ -9,5 +9,8 @@
   },
   "scripts": {},
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "netlify": {
+    "functions": "netlify/functions"
+  }
 }
