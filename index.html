@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - Núcleo de Gestión Empresarial</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          text-align: center;
+          background: white;
+          color: black;
+          scroll-behavior: smooth;
+      }
+
+      header {
+          padding: 20px;
+          font-size: 28px;
+          font-weight: bold;
+          text-transform: uppercase;
+          background: #003366;
+          color: white;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          position: relative;
+      }
+
+      /* Navegación principal */
+      .nav-main {
+          background: #002244;
+          display: flex;
+          justify-content: center;
+          padding: 10px 0;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+      }
+
+      .nav-main a {
+          color: white;
+          text-decoration: none;
+          padding: 10px 15px;
+          margin: 0 5px;
+          font-weight: bold;
+          transition: all 0.3s ease;
+      }
+
+      .nav-main a:hover {
+          background: #003366;
+          border-radius: 5px;
+      }
+
+      .container {
+          padding: 40px 20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
+          max-width: 1200px;
+          margin: auto;
+      }
+
+      .section {
+          flex: 1 1 300px;
+          border-radius: 10px;
+          box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+          text-align: left;
+          transition: all 0.3s ease-in-out;
+          min-width: 280px;
+          max-width: 330px;
+          overflow: hidden;
+          background: white;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .section:hover {
+          transform: translateY(-10px);
+          box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .section-image {
+          height: 180px;
+          width: 100%;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+      }
+
+     /* Imágenes de fondo para cada sección */
+     .section-tecnologia { background-image: url('https://img.freepik.com/foto-gratis/concepto-control-calidad-estandar-m_23-2150041866.jpg?semt=ais_hybrid&w=740'); }
+     .section-personal { background-image: url('https://cdn-es.checklistfacil.com/checklistfacil-5-maneras-de-mejorar-la-gestion-de-personal-con-un-software-de-checklist.jpg'); }
+     .section-empresarial { background-image: url('https://todoingenierias.com/wp-content/uploads/crecimiento-empresarial-con-ingenieria-de-gestion.jpg'); }
+     .section-formacion { background-image: url('https://media.licdn.com/dms/image/v2/D4D12AQFq300xW1G2wQ/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1712105107128?e=2147483647&v=beta&t=-GAx8Z8_lHF7pr-9it4GUmRiWvJKkYEVhY-ydvVWH-k'); }
+     .section-logistica { background-image: url('https://www.p2grow.com/fotospages/mac_obras_civiles_1518469290.jpg'); }
+     .section-arbitraje { background-image: url('https://www.unir.net/wp-content/uploads/2021/01/lawyer-or-judge-with-gavel-and-balance-handshake-with-client-picture-id1142103612.jpg'); }
+     .section-turismo { background-image: url('https://www.diaridetarragona.com/binrepository/768x445/0c7/768d432/none/15017645/GCEW/opi-ultima_241-1525588_20240218192241.png'); }
+     .section-proyectos { background-image: url('https://concepto.de/wp-content/uploads/2019/05/gestion-de-proyectos-e1557614538568.jpg'); }
+      
+     .section-badge {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          background: rgba(0, 0, 0, 0.7);
+          color: white;
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 0.8em;
+          font-weight: bold;
+          text-transform: capitalize;
+      }
+
+      .section-content {
+          padding: 20px;
+      }
+
+      h2 {
+          color: #FF5722;
+          margin-top: 0;
+          font-size: 1.3em;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          text-transform: capitalize;
+      }
+
+      .section p {
+          color: #555;
+          margin-bottom: 20px;
+      }
+
+      .btn {
+          display: inline-block;
+          padding: 8px 15px;
+          background: red;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          transition: background 0.3s, transform 0.2s;
+          align-self: flex-start;
+          text-transform: lowercase;
+      }
+
+      .btn:hover {
+          background: #e60000;
+          transform: scale(1.05);
+      }
+
+      .btn::first-letter {
+          text-transform: uppercase;
+      }
+
+      .info-button {
+          position: absolute;
+          bottom: 10px;
+          right: 10px;
+          background: rgba(0, 0, 0, 0.5);
+          color: white;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+      }
+
+      .footer {
+          background: #333;
+          padding: 30px;
+          margin-top: 50px;
+          color: white;
+          border-top-left-radius: 20px;
+          border-top-right-radius: 20px;
+      }
+
+      .register-button {
+          background: red;
+          color: white;
+          padding: 10px 15px;
+          border-radius: 5px;
+          font-size: 16px;
+          font-weight: bold;
+          text-decoration: none;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          transition: background 0.3s, transform 0.2s;
+          display: inline-block;
+          margin: 5px 20px;
+      }
+
+      .register-button:hover {
+          background: #e60000;
+          transform: scale(1.05);
+      }
+
+      .toggle-description {
+          cursor: pointer;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+
+      .description {
+          display: block;
+      }
+
+      .social-icons a {
+          color: white;
+          font-size: 24px;
+          margin: 0 10px;
+      }
+
+      @media (max-width: 768px) {
+          .container {
+              flex-direction: column;
+              align-items: center;
+          }
+          
+          .main-hero-section {
+              flex-direction: column;
+          }
+          
+          .slider-promociones {
+              margin: 0 20px 20px 20px;
+          }
+          
+          .registro-box {
+              margin: 0 20px;
+          }
+      }
+      
+      /* Estilos para la sección principal con slider y botón */
+      .main-hero-section {
+          display: flex;
+          width: 100%;
+          background: white;
+          padding: 20px 0;
+          margin-bottom: 20px;
+          border-bottom: 1px solid #eee;
+      }
+      
+      /* Estilos para el slider */
+      .slider-promociones {
+          flex: 3;
+          background: white;
+          border: 1px solid #ddd;
+          border-radius: 10px;
+          overflow: hidden;
+          margin: 0 20px 0 20px;
+      }
+      
+      .slider-titulo {
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+          padding: 10px 0;
+          background: #003366;
+          color: white;
+          margin: 0;
+          text-transform: capitalize;
+      }
+
+      .slider-titulo span {
+          text-transform: uppercase;
+      }
+      
+      .slider-contenedor {
+          position: relative;
+          display: flex;
+          align-items: center;
+          height: 300px;
+          overflow: hidden;
+      }
+      
+      .slider {
+          display: flex;
+          width: 300%;
+          transition: transform 0.5s ease-in-out;
+          height: 100%;
+      }
+      
+      .slide {
+          flex: 1 0 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      
+      .slide img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+      }
+      
+      .slide.activo {
+          display: block;
+      }
+      
+      .slider-boton {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(255, 0, 0, 0.8);
+          border: none;
+          color: white;
+          font-size: 1.5rem;
+          padding: 10px 15px;
+          cursor: pointer;
+          z-index: 2;
+          border-radius: 50%;
+          transition: background 0.3s;
+      }
+      
+      .slider-boton:hover {
+          background: rgba(255, 0, 0, 1);
+      }
+      
+      #anterior {
+          left: 15px;
+      }
+      
+      #siguiente {
+          right: 15px;
+      }
+      
+      /* Estilos para el botón de registro */
+      .registro-box {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 20px;
+          margin-right: 20px;
+      }
+      
+      .section-title {
+          font-size: 2em;
+          margin: 40px 0 20px 0;
+          color: #003366;
+          text-align: center;
+          padding-top: 30px;
+      }
+  </style>
+</head>
+<body>
+  <header>
+      FUNDACIÓN - NÚCLEO DE GESTIÓN EMPRESARIAL
+  </header>
+  
+  <!-- Menú principal de navegación -->
+  <div class="nav-main">
+      <a href="#" id="inicio-link">Inicio</a>
+      <a href="#servicios-section" id="servicios-link">Servicios</a>
+      <a href="#contactos-section" id="contactos-link">Contactos</a>
+  </div>
+  
+  <!-- Sección principal con slider y botón de registro -->
+  <div class="main-hero-section">
+      <div class="slider-promociones">
+          <h1 class="slider-titulo">🎯 <span>promociones</span></h1>
+          <div class="slider-contenedor">
+              <button id="anterior" class="slider-boton">⬅️</button>
+              <div class="slider" id="slider">
+                  <div class="slide activo">
+                      <img src="assets/images/impu.png" alt="Oferta Conductor">
+                  </div>
+                  <div class="slide">
+                      <img src="assets/images/impu.png" alt="Oferta Conductor">
+                  </div>
+                  <div class="slide">
+                      <img src="assets/images/impu.png" alt="Oferta Conductor">
+                  </div>
+              </div>
+              <button id="siguiente" class="slider-boton">➡️</button>
+          </div>
+      </div>
+      
+      <div class="registro-box">
+        <a href="registro.html" class="register-button">
+            <span class="titulo">MI PRIMER EMPLEO</span><br>
+            <span class="subtitulo">registra tu hoja de vida</span>
+          </a>
+      </div>
+  </div>
+  
+  <!-- Sección de servicios -->
+  <h2 class="section-title" id="servicios-section">Nuestros servicios</h2>
+  <div class="container">
+      <div class="section">
+          <div class="section-image section-tecnologia">
+              <div class="section-badge">gestión tecnológica</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-microchip" style="color: #FF5722;"></i> gestión tecnológica</h2>
+              <p>Desarrollo de software, soporte técnico y Marketing Digital.</p>
+              <a href="tecnologicos.html" class="btn">descubrir</a>
+          </div>
+      </div>
+      
+      <div class="section">
+          <div class="section-image section-personal">
+              <div class="section-badge">gestión de personal</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-users" style="color: #FF5722;"></i> gestión de personal</h2>
+              <p>Proceso de selección, Capacitaciones, Contrataciones.</p>
+              <a href="personal.html" class="btn">ver más</a>
+          </div>
+      </div>
+      
+      <div class="section">
+          <div class="section-image section-empresarial">
+              <div class="section-badge">gestión empresarial</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-building" style="color: #FF5722;"></i> gestión empresarial</h2>
+              <p>Servicios Contables, Branding y Desarrollo Organizacional.</p>
+              <a href="empresarial.html" class="btn">descubrir</a>
+          </div>
+      </div>
+      
+      <div class="section">
+          <div class="section-image section-formacion">
+              <div class="section-badge">gestión formación</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-graduation-cap" style="color: #FF5722;"></i> gestión formación</h2>
+              <p>Diplomados, Capacitaciones y Sesiones.</p>
+              <a href="formacion.html" class="btn">descubrir</a>
+          </div>
+      </div>
+      
+      <div class="section">
+          <div class="section-image section-logistica">
+              <div class="section-badge">gestión logística</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-truck-moving" style="color: #FF5722;"></i> gestión logística</h2>
+              <p>Mantenimiento Infraestructura, Obras Civiles y Desarrollo Ambiental.</p>
+              <a href="logistica.html" class="btn">descubrir</a>
+          </div>
+      </div>
+      
+      <div class="section">
+          <div class="section-image section-arbitraje">
+              <div class="section-badge">gestión arbitraje</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-gavel" style="color: #FF5722;"></i> gestión arbitraje</h2>
+              <p>Consiliación de Derecho, Arbitraje y Asesoría jurídica a empresas y personas naturales no comerciantes.</p>
+              <a href="arbitraje.html" class="btn">conocer más</a>
+          </div>
+      </div>
+      
+      <div class="section">
+          <div class="section-image section-turismo">
+              <div class="section-badge">gestión turística</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-plane" style="color: #FF5722;"></i> gestión turística</h2>
+              <p>Descubre planes turísticos, Empresas aliadas y agenda de eventos.</p>
+              <a href="turismo.html" class="btn">explorar</a>
+          </div>
+      </div>
+
+      <div class="section">
+          <div class="section-image section-proyectos">
+              <div class="section-badge">gestión proyectos</div>
+              <a href="#" class="info-button"><i class="fa-solid fa-info"></i></a>
+          </div>
+          <div class="section-content">
+              <h2><i class="fa-solid fa-project-diagram" style="color: #FF5722;"></i> gestión proyectos</h2>
+              <p>Formulación, Desarrollo y Financiación de proyectos.</p>
+              <a href="proyectos.html" class="btn">explorar</a>
+          </div>
+      </div>
+  </div>
+
+  <footer class="footer" id="contactos-section">
+      <div class="toggle-description">sobre nosotros</div>
+      <div class="description" id="description">
+          <p>Fundación Nucleo de la Gestión Empresarial es una iniciativa dedicada a fomentar servicios en diferentes areas contribuyendo al desarrollo empresarial.</p>
+          <p>📍 Ubicación: Sincelejo-Sucre, Colombia</p>
+          <p>📧 Email: Fundaciongestionempresarial@gmail.com</p>
+          <p>📞 Teléfono: +123 456 7890</p>
+          <div class="social-icons">
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+      </div>
+  </footer>
+  
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const inicioLink = document.getElementById('inicio-link');
+          const serviciosLink = document.getElementById('servicios-link');
+          const contactosLink = document.getElementById('contactos-link');
+          
+          // Navegación de inicio - vuelve al principio de la página
+          inicioLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth'
+              });
+          });
+          
+          // Navegación de servicios - desplaza a la sección de servicios
+          serviciosLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              const serviciosSection = document.getElementById('servicios-section');
+              serviciosSection.scrollIntoView({ behavior: 'smooth' });
+          });
+          
+          // Navegación de contactos - desplaza a la sección de contactos
+          contactosLink.addEventListener('click', function(e) {
+              e.preventDefault();
+              const contactosSection = document.getElementById('contactos-section');
+              contactosSection.scrollIntoView({ behavior: 'smooth' });
+          });
+          
+          // Script para el slider
+          let indiceActual = 0;
+          const slides = document.querySelectorAll('.slide');
+          const slider = document.getElementById('slider');
+          const botonAnterior = document.getElementById('anterior');
+          const botonSiguiente = document.getElementById('siguiente');
+          
+          function mostrarSlide(indice) {
+              slider.style.transform = `translateX(-${indice * 100}%)`;
+          }
+          
+          botonSiguiente.addEventListener('click', () => {
+              indiceActual = (indiceActual + 1) % slides.length;
+              mostrarSlide(indiceActual);
+          });
+          
+          botonAnterior.addEventListener('click', () => {
+              indiceActual = (indiceActual - 1 + slides.length) % slides.length;
+              mostrarSlide(indiceActual);
+          });
+          
+          // Cambio automático de slide cada 4 segundos
+          setInterval(() => {
+              botonSiguiente.click();
+          }, 4000);
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proyectos - Núcleo del Servicio Empresarial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: linear-gradient(to bottom, #673ab7, #512da8);
+            color: white;
+        }
+
+        header {
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background: #e3f2fd;
+            color: #000;
+            padding: 15px;
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #0d47a1;
+            font-size: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background: #1565c0;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0d47a1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <i class="fa-solid fa-tools"></i> proyectos - Núcleo del Servicio Empresarial
+    </header>
+    <div class="container">
+        <div class="card">
+            <h2>Formulación</h2>
+            <p>Servicios de contaduría y administración.</p>
+            <a href="#" class="btn">Ver servicios</a>
+        </div>
+        <div class="card">
+            <h2>Desarrollo</h2>
+            <p>Conoce como desarrollaremos tu idea de proyectos.</p>
+            <a href="#" class="btn">Explorar</a>
+        </div>
+        <div class="card">
+            <h2>Financiación de proyectos</h2>
+            <p>Invierte en tus ideas para generar.</p>
+            <a href="#" class="btn">Ver opciones</a>
+        </div>
+    </div>
+</body>
+</html>
