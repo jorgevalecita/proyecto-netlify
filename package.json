@@ -2,6 +2,7 @@
   "name": "proyecto-netlify",
   "version": "1.0.0",
   "description": "Formulario de empleo con envío de correo en Netlify Functions",
+  "main": "index.js",
   
   "dependencies": {
     "busboy": "^1.6.0",
