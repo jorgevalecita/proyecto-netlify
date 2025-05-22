@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
-const Busboy = require('busboy'); // ✅ Corrección aquí
+// ✅ Corrección: Importar busboy correctamente
+const busboy = require('busboy');
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
@@ -10,29 +11,33 @@ exports.handler = async function (event) {
   }
 
   return new Promise((resolve, reject) => {
-    const busboy = new Busboy({ headers: event.headers });
+    // ✅ Corrección: Usar busboy() en lugar de new Busboy()
+    const bb = busboy({ headers: event.headers });
     const fields = {};
     const files = [];
 
-    busboy.on('field', (fieldname, val) => {
+    bb.on('field', (fieldname, val) => {
       fields[fieldname] = val;
     });
 
-    busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
+    bb.on('file', (fieldname, file, info) => {
+      // ✅ Corrección: En versiones nuevas, el objeto info contiene filename y mimeType
+      const { filename, mimeType } = info;
       const buffers = [];
+      
       file.on('data', (data) => buffers.push(data));
       file.on('end', () => {
         files.push({
           filename,
           content: Buffer.concat(buffers),
-          contentType: mimetype,
+          contentType: mimeType,
         });
       });
     });
 
-    busboy.on('finish', async () => {
+    bb.on('finish', async () => {
       try {
-        const transporter = nodemailer.createTransport({
+        const transporter = nodemailer.createTransporter({
           service: 'gmail',
           auth: {
             user: process.env.EMAIL_USER,
@@ -61,6 +66,7 @@ exports.handler = async function (event) {
           body: JSON.stringify({ message: 'Formulario enviado exitosamente' }),
         });
       } catch (error) {
+        console.error('Error enviando email:', error);
         resolve({
           statusCode: 500,
           body: JSON.stringify({ error: error.message }),
@@ -68,6 +74,15 @@ exports.handler = async function (event) {
       }
     });
 
-    busboy.end(Buffer.from(event.body, event.isBase64Encoded ? 'base64' : 'utf8'));
+    bb.on('error', (err) => {
+      console.error('Error en busboy:', err);
+      resolve({
+        statusCode: 500,
+        body: JSON.stringify({ error: 'Error procesando el formulario' }),
+      });
+    });
+
+    // ✅ Corrección: Procesar el body correctamente
+    bb.end(Buffer.from(event.body, event.isBase64Encoded ? 'base64' : 'utf8'));
   });
 };
