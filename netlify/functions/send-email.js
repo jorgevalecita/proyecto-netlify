@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
-const Busboy = require('busboy');
+const Busboy = require('busboy').Busboy;
 
-exports.handler = async function(event, context) {
+exports.handler = async function(event) {
   context.callbackWaitsForEmptyEventLoop = false;
 
   if (event.httpMethod !== 'POST') {
