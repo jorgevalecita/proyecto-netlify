@@ -6,101 +6,378 @@
   <title>Registrar Empleo</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" crossorigin="anonymous"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: white;
-      color: white;
-    }
-    .form-container {
-      background: white;
-      padding: 20px 30px;
-      border-radius: 15px;
-      text-align: left;
-      width: 90%;
-      max-width: 550px;
-      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
-      color: black;
-      border: 3px solid #ff9800;
-    }
-    input, textarea, select, button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 5px;
-      border: 2px solid #333;
       box-sizing: border-box;
-      font-size: 16px;
     }
-    button {
-      background: orangered;
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+      pointer-events: none;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+      position: relative;
+      animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .form-header::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b6b, #ffa500);
+      border-radius: 2px;
+    }
+
+    h2 {
+      color: #2c3e50;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-subtitle {
+      color: #7f8c8d;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .input-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #bdc3c7;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      z-index: 2;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 16px 50px 16px 45px;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+      transform: translateY(-2px);
+    }
+
+    input:focus + .input-icon,
+    textarea:focus + .input-icon,
+    select:focus + .input-icon {
+      color: #667eea;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      padding-top: 16px;
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23bdc3c7" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+      background-repeat: no-repeat;
+      background-position: right 15px center;
+      background-size: 16px;
+      appearance: none;
+    }
+
+    input[type="file"] {
+      padding: 12px;
+      border: 2px dashed #bdc3c7;
+      background: rgba(248, 249, 250, 0.8);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    input[type="file"]:hover {
+      border-color: #667eea;
+      background: rgba(102, 126, 234, 0.05);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
       border: none;
-      font-size: 18px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
     }
-    button:hover {
-      background: #e64a19;
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
     }
-    h2 {
-      color: #ff5722;
-      border-bottom: 2px solid #ff9800;
-      padding-bottom: 10px;
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
     }
-    label {
-      font-weight: bold;
-      margin-top: 12px;
-      display: block;
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    #otherFieldContainer {
+      animation: slideDown 0.3s ease-out;
+      margin-top: 15px;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        max-height: 100px;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      
+      .form-container {
+        padding: 30px 25px;
+        border-radius: 20px;
+      }
+      
+      h2 {
+        font-size: 1.8rem;
+      }
+      
+      input, textarea, select {
+        padding: 14px 40px 14px 40px;
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 25px 20px;
+        margin: 10px;
+      }
+      
+      h2 {
+        font-size: 1.6rem;
+      }
+      
+      input, textarea, select {
+        padding: 12px 35px 12px 35px;
+      }
+      
+      .submit-btn {
+        padding: 16px;
+        font-size: 1rem;
+      }
+    }
+
+    /* Loading state */
+    .loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .loading .submit-btn {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+
+    /* Success animation */
+    @keyframes success {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .success {
+      animation: success 0.6s ease-out;
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Registrar Empleo</h2>
+  <div class="form-container" id="formContainer">
+    <div class="form-header">
+      <h2><i class="fas fa-briefcase"></i> Registrar Empleo</h2>
+      <p class="form-subtitle">Completa tus datos profesionales</p>
+    </div>
+    
     <form id="jobForm" method="POST" action="/.netlify/functions/send-email" enctype="multipart/form-data">
-      <label for="name">Nombre Completo:</label>
-      <input type="text" id="name" name="name" required />
-
-      <label for="phone">Teléfono:</label>
-      <input type="tel" id="phone" name="phone" required />
-
-      <label for="email">Correo:</label>
-      <input type="email" id="email" name="email" required />
-
-      <label for="education">Formación Profesional:</label>
-      <select id="education" name="education" onchange="showOtherOption(this)" required>
-        <option value="">Selecciona tu carrera</option>
-        <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
-        <option value="Administración de Empresas">Administración de Empresas</option>
-        <option value="Medicina">Medicina</option>
-        <option value="Derecho">Derecho</option>
-        <option value="Psicología">Psicología</option>
-        <option value="Contaduría Pública">Contaduría Pública</option>
-        <option value="Arquitectura">Arquitectura</option>
-        <option value="Ingeniería Civil">Ingeniería Civil</option>
-        <option value="Marketing y Publicidad">Marketing y Publicidad</option>
-        <option value="Enfermería">Enfermería</option>
-        <option value="otra">Otra (especificar abajo)</option>
-      </select>
-
-      <div id="otherFieldContainer" style="display: none;">
-        <label for="otherEducation">Otra profesión:</label>
-        <input type="text" id="otherEducation" name="other_education" />
+      <div class="input-group">
+        <label for="name">Nombre Completo:</label>
+        <div class="input-wrapper">
+          <input type="text" id="name" name="name" required />
+          <i class="fas fa-user input-icon"></i>
+        </div>
       </div>
 
-      <label for="skills">Habilidades:</label>
-      <textarea id="skills" name="skills" rows="4" required></textarea>
+      <div class="input-group">
+        <label for="phone">Teléfono:</label>
+        <div class="input-wrapper">
+          <input type="tel" id="phone" name="phone" required />
+          <i class="fas fa-phone input-icon"></i>
+        </div>
+      </div>
 
-      <label for="resume">Subir Archivo (CSV o PDF):</label>
-      <input type="file" id="resume" name="resume" accept=".csv, .pdf" required />
+      <div class="input-group">
+        <label for="email">Correo:</label>
+        <div class="input-wrapper">
+          <input type="email" id="email" name="email" required />
+          <i class="fas fa-envelope input-icon"></i>
+        </div>
+      </div>
 
-      <button type="submit">Enviar</button>
+      <div class="input-group">
+        <label for="education">Formación Profesional:</label>
+        <div class="input-wrapper">
+          <select id="education" name="education" onchange="showOtherOption(this)" required>
+            <option value="">Selecciona tu carrera</option>
+            <option value="Ingeniería de Sistemas">Ingeniería de Sistemas</option>
+            <option value="Administración de Empresas">Administración de Empresas</option>
+            <option value="Medicina">Medicina</option>
+            <option value="Derecho">Derecho</option>
+            <option value="Psicología">Psicología</option>
+            <option value="Contaduría Pública">Contaduría Pública</option>
+            <option value="Arquitectura">Arquitectura</option>
+            <option value="Ingeniería Civil">Ingeniería Civil</option>
+            <option value="Marketing y Publicidad">Marketing y Publicidad</option>
+            <option value="Enfermería">Enfermería</option>
+            <option value="otra">Otra (especificar abajo)</option>
+          </select>
+          <i class="fas fa-graduation-cap input-icon"></i>
+        </div>
+
+        <div id="otherFieldContainer" style="display: none;">
+          <label for="otherEducation">Otra profesión:</label>
+          <div class="input-wrapper">
+            <input type="text" id="otherEducation" name="other_education" />
+            <i class="fas fa-pencil-alt input-icon"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="skills">Habilidades:</label>
+        <div class="input-wrapper">
+          <textarea id="skills" name="skills" rows="4" required placeholder="Describe tus habilidades y competencias profesionales..."></textarea>
+          <i class="fas fa-tools input-icon"></i>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="resume">Subir Archivo (CSV o PDF):</label>
+        <div class="input-wrapper">
+          <input type="file" id="resume" name="resume" accept=".csv, .pdf" required />
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-paper-plane"></i> Enviar Solicitud
+      </button>
     </form>
   </div>
 
@@ -121,6 +398,13 @@
       e.preventDefault();
 
       const form = e.target;
+      const formContainer = document.getElementById('formContainer');
+      const submitBtn = form.querySelector('.submit-btn');
+      
+      // Add loading state
+      formContainer.classList.add('loading');
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
       const formData = new FormData(form);
 
       // Si es 'otra', reemplaza el valor
@@ -135,18 +419,47 @@
           body: formData
         });
 
+        // Remove loading state
+        formContainer.classList.remove('loading');
+
         if (response.ok) {
+          // Success animation
+          formContainer.classList.add('success');
+          submitBtn.innerHTML = '<i class="fas fa-check"></i> ¡Enviado!';
+          submitBtn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+          
           alert('Formulario enviado correctamente!');
           form.reset();
           document.getElementById('otherFieldContainer').style.display = 'none';
+          
+          // Reset button after delay
+          setTimeout(() => {
+            formContainer.classList.remove('success');
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Solicitud';
+            submitBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+          }, 3000);
         } else {
           const errorText = await response.text();
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Solicitud';
           alert('Error al enviar formulario:\n' + errorText);
         }
       } catch (error) {
+        formContainer.classList.remove('loading');
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Solicitud';
         alert('Error de red o servidor.');
         console.error(error);
       }
+    });
+
+    // Add floating animation to icons
+    document.querySelectorAll('.input-icon').forEach(icon => {
+      icon.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-50%) scale(1.1)';
+      });
+      
+      icon.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(-50%) scale(1)';
+      });
     });
   </script>
 </body>
