@@ -21,7 +21,7 @@
       justify-content: center;
       padding: 20px;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden; /* Cambiado a overflow-x para evitar cortes verticales */
     }
 
     /* Animated Background */
@@ -111,9 +111,10 @@
       gap: 50px;
       align-items: center;
       width: 100%;
-      max-width: 1400px;
+      max-width: 1200px; /* Reducido de 1400px para mejor ajuste */
       position: relative;
       z-index: 2;
+      padding: 20px;
     }
 
     /* Left Panel - Interactive Visual */
@@ -238,12 +239,14 @@
       border-radius: 24px;
       flex: 1;
       max-width: 550px;
+      min-width: 300px; /* Añadido para evitar que se haga muy pequeño */
       box-shadow: 
         0 25px 50px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(102, 126, 234, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
       position: relative;
       animation: slideUp 0.8s ease-out;
+      margin: 20px auto; /* Centrado adicional */
     }
 
     @keyframes slideUp {
@@ -446,10 +449,11 @@
       }
     }
 
-    /* Responsive Design */
+    /* Responsive Design - Mejoras en la responsividad */
     @media (max-width: 1200px) {
       .main-container {
         gap: 30px;
+        max-width: 1000px;
       }
       
       .career-visual {
@@ -465,21 +469,27 @@
       .career-card i {
         font-size: 1.5rem;
       }
+      
+      .form-container {
+        padding: 30px;
+      }
     }
 
     @media (max-width: 992px) {
       .main-container {
         flex-direction: column;
         gap: 40px;
+        padding: 20px 10px;
       }
       
       .visual-panel {
         min-height: 300px;
+        width: 100%;
       }
       
       .career-visual {
-        max-width: 350px;
-        height: 300px;
+        max-width: 100%;
+        height: 350px;
       }
       
       .career-card {
@@ -492,16 +502,24 @@
         font-size: 1.3rem;
         margin-bottom: 5px;
       }
+      
+      .form-container {
+        width: 90%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
     }
 
     @media (max-width: 768px) {
       body {
         padding: 10px;
+        min-height: auto;
       }
       
       .form-container {
-        padding: 30px 25px;
+        padding: 25px;
         border-radius: 20px;
+        width: 95%;
       }
       
       h2 {
@@ -518,27 +536,81 @@
       }
       
       .career-visual {
-        max-width: 300px;
-        height: 250px;
+        max-width: 100%;
+        height: 300px;
+      }
+      
+      .career-card {
+        width: 120px;
+        height: 70px;
+        font-size: 0.8rem;
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 576px) {
       .form-container {
-        padding: 25px 20px;
+        padding: 20px 15px;
+        width: 100%;
       }
       
       h2 {
         font-size: 1.6rem;
       }
       
+      .form-subtitle {
+        font-size: 0.9rem;
+      }
+      
       input, textarea, select {
         padding: 12px 35px 12px 35px;
+        font-size: 0.9rem;
       }
       
       .submit-btn {
         padding: 16px;
         font-size: 1rem;
+      }
+      
+      .visual-panel {
+        min-height: 200px;
+      }
+      
+      .career-visual {
+        height: 250px;
+      }
+      
+      .career-card {
+        width: 100px;
+        height: 60px;
+        font-size: 0.7rem;
+      }
+      
+      .career-card i {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .form-container {
+        padding: 15px 10px;
+      }
+      
+      h2 {
+        font-size: 1.4rem;
+      }
+      
+      input, textarea, select {
+        padding: 10px 30px 10px 30px;
+      }
+      
+      .input-icon {
+        left: 10px;
+        font-size: 1rem;
+      }
+      
+      .submit-btn {
+        padding: 14px;
+        font-size: 0.95rem;
       }
       
       .visual-panel {
